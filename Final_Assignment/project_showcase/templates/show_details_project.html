@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block link %}
+	<link href="{% static 'css/templatemo-first-portfolio-style.css' %}" rel="stylesheet">
+{% endblock link %}
+
+{% block title %}show Project!{% endblock title %}
+
+
+{% block content %}
+	<div class="w-75 m-auto mt-4 mb-5">
+	<h2 class="mt-4 text-decoration-none">Category : <a href="{% url 'show_category' %}">Here all Category</a></h2>
+
+ 
+	<div class="col">
+		<div class="card h-100">
+		<img src="{{details.screenshots.url}}" class="card-img-top" alt="...">
+		<div class="card-body">
+			<h5 class="card-title">{{details.title}}</h5>
+			<p class="card-text">{{details.description}}</p>
+			<p class="card-text">Technology: {{details.technologies_used}}</p>
+			<p class="card-text">Source Code: <a href="{{details.project_url}}" target="_blank"> Code link</a></p>
+			<p class="card-text">Category: {{details.category}}</p>
+		</div>
+		</div>
+	</div>
+     
+
+    
+	<div class="container">
+		<div class="pagination">
+			<span class="step-links">
+				{% if project.has_previous %}
+					<span class="pasination">
+					<a class="nav-link-next nav-item nav-link rounded" href="?page=1"> &laquo; First</a>
+					<a class="nav-link-prev nav-item nav-link rounded" href="?page={{ project.previous_page_number }}"> <i class="arrow-prev fas fa-long-arrow-alt-left"></i> Previous</a>
+					</span>
+				{% endif %}
+
+				<span class="current">
+				PAGE {{ project.number }} OF {{ project.paginator.num_pages }}
+				</span>
+
+				{% if project.has_next %}
+					<span class="pasination">
+					<a class="nav-link-next nav-item nav-link rounded" href="?page={{ project.next_page_number }}">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+					<a class="nav-link-next nav-item nav-link rounded" href="?page={{ project.paginator.num_pages }}"> Last &raquo;</a>
+					</span>
+				{% endif %}
+			</span>
+		</div>
+	</div>
+
+ </section>
+	    
+</div><!--//main-wrapper-->
+
+{% endblock content %}

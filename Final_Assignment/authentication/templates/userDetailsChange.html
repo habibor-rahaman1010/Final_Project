@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Registration{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+    {% for message in messages %}
+        <small class="text-bg-success text-white text-center p3">{{message}}</small>
+    {% endfor %}
+    {% endif %}
+
+    <div class="w-50 container">
+        <h1 class="my-3">Please Update User Details Here:</h1>
+        <form method="POST" novalidate>
+            {% if form.non_field_errors %}
+            {% for er in form.non_field_errors %}
+                <p class="bg-danger text-white text-center p-2"> {{er}}</p>
+            {% endfor %}
+            {% endif %}
+
+            <!-- {{form | crispy}} -->
+            {% csrf_token %}
+            {% for fm in form %}
+                {{fm.label_tag}}
+                {{fm}}
+                {{fm.errors | striptags}}
+                <br>
+            {% endfor %}
+            <button class="btn btn-success mt-3" type="submit">Update User Data</button>
+        </form> <br>
+    </div>
+
+{% endblock content %}

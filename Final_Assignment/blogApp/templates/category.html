@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block link %}
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+	<link href="{% static 'css/templatemo-first-portfolio-style.css' %}" rel="stylesheet">
+    <link id="theme-style" rel="stylesheet" href="{% static 'css/theme-1.css' %}">
+{% endblock link %}
+
+{% block title %}Category{% endblock title %}
+
+
+{% block content %}
+
+	 <div class="container">
+	    <section class="blog-list px-3 py-5 p-md-5">
+		    <div class="container">
+            <h4 class="cat"> Post Category : {{cat.name}}</h4>
+			    {% for x in post %}
+					<div class="item mb-5">
+						<div class="media">
+							<img class="mr-3 img-fluid post-thumb d-none d-md-flex" src="{{x.image.url}}" alt="image">
+							<div class="media-body">
+								<h3 class="title mb-1"><a href="{% url 'article_details' id=x.id slug=x.slug %}">{{x.title}}</a></h3>
+								<div class="meta mb-1"><span class="date"> <i class="far fa-calendar-alt"></i> Post Published - {{x.published}}</span><span class="time"> <i class="fas fa-user-circle"></i> Article Author - {{x.artcle_author.name.get_full_name}}</span> <span class="comment"> <i class="far fa-list-alt"></i> Post Category - <a href="{% url 'category' name=x.category %}">{{x.category}}</a></span></div>
+								<div class="intro hello1"> {{x.body|truncatechars:200 | safe}}</div>
+								<a class="more-link btn btn-success" href="{% url 'article_details' id=x.id slug=x.slug %}">Read more &rarr;</a> &nbsp;
+								<div class="my-3 fb-like" data-href="http://127.0.0.1:8000/article/{{x.id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+								<div class="fb-share-button" data-href="http://127.0.0.1:8000/article/{{x.id}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Farticle%2F10%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+							</div><!--//media-body-->
+						</div><!--//media-->
+					</div><!--//item-->
+				{% endfor %}
+		    </div>
+
+
+	<div class="container">
+		<div class="pagination">
+			<span class="step-links">
+				{% if post.has_previous %}
+					<span class="pasination">
+					<a class="nav-link-next nav-item nav-link rounded" href="?page=1"> &laquo; First</a>
+					<a class="nav-link-prev nav-item nav-link rounded" href="?page={{ post.previous_page_number }}"> <i class="arrow-prev fas fa-long-arrow-alt-left"></i> Previous</a>
+					</span>
+				{% endif %}
+
+				<span class="current">
+				PAGE {{ post.number }} OF {{ post.paginator.num_pages }}
+				</span>
+
+				{% if post.has_next %}
+					<span class="pasination">
+					<a class="nav-link-next nav-item nav-link rounded" href="?page={{ post.next_page_number }}">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+					<a class="nav-link-next nav-item nav-link rounded" href="?page={{ post.paginator.num_pages }}"> Last &raquo;</a>
+					</span>
+				{% endif %}
+			</span>
+		</div>
+	</div>
+</section>
+	   
+    
+ </div><!--//main-wrapper-->
+
+{% endblock content %}

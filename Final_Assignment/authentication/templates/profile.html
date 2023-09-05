@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+
+{% if messages %}
+{% for message in messages %}
+    <small class="text-bg-success text-white text-center p3">{{message}}</small>
+{% endfor %}
+{% endif %}
+
+<section class="shadow w-50 m-auto">
+    <div class="d-flex justify-content-center">
+        <div>
+        {% for x in profile %}<img class="mt-3" src="{{x.profile_picture.url}}" width="100" alt="profile">{% endfor %}
+        <p>User: {{user.username}}</p>
+        <p>Email: {{user.email}}</p>
+        <p>First Name: {{user.first_name}}</p>
+        <p>Last Name: {{user.last_name}}</p>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-center">
+        <p><a class="btn btn-danger text-white mx-3" href="{% url 'passchange' %}">Password Change</a></p>
+        <p><a class="btn btn-danger text-white mx-3" href="{% url 'forgotpass' %}">forgot Password</a></p>
+        <p><a class="btn btn-danger text-white" href="{% url 'userdetailschange' %}">User Profile Update</a></p>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Registration{% endblock title %}
+
+{% block content %}
+    <div class="w-50 container">
+        <h1 class="my-3">Please Register Here:</h1>
+        <form method="POST" novalidate>
+            <!-- {{form | crispy}} -->
+            {% csrf_token %}
+            {% for fm in form %}
+                {{fm.label_tag}}
+                {{fm}}
+                {{fm.errors | striptags}}
+                <br>
+            {% endfor %}
+            <button class="btn btn-success mt-3" type="submit">Registration</button>
+        </form> <br>
+        <p>Already have an accout <a href="{% url 'login' %}">login now</a></p>
+    </div>
+
+{% endblock content %}

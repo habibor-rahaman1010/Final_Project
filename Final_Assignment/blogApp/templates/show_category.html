@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+	<link href="{% static 'css/templatemo-first-portfolio-style.css' %}" rel="stylesheet">
+  <link id="theme-style" rel="stylesheet" href="{% static 'css/theme-1.css' %}">
+{% endblock link %}
+
+{% block title %}All Category{% endblock title %}
+
+{% block content %}
+<div class="container">
+<h3>My All Category Here !</h3> <br><br>
+{% for x in category %}
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col"> <a href="{% url 'category' x.name %}">{{forloop.counter}} &nbsp; {{x.name}}</a> </th>
+    </tr>
+  </thead>
+{% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link id="theme-style" rel="stylesheet" href="{% static 'css/theme-1.css' %}">
+	<link href="{% static 'css/templatemo-first-portfolio-style.css' %}" rel="stylesheet">
+{% endblock link %}
+
+{% block title %}articles details{% endblock title %}
+
+{% block content %} <br><br>
+<div class="container">
+<section class="blog-list px-3 py-5 p-md-5">
+        <div class="item mb-5">
+            <div class="media">
+                <div class="container">
+					<div class="media-body">
+					 <img class="image img-fluid" src="{{post.image.url}}" alt="image"><br><br><br>
+                    <h3 class="title mb-1">{{post.title}}</h3>
+                    <div class="meta mb-1"><span class="date"> <i class="far fa-calendar-alt"></i> Post Published - {{post.published}}</span><span class="time"> <i class="fas fa-user-circle"></i> Article Author - {{post.artcle_author.name.get_full_name}}</span> <br> <span class="comment"> <i class="far fa-list-alt"></i> Post Category - <a href="{% url 'category' name=post.category %}">{{post.category}}</a></span></div> <br> 
+                    <div class="intro"> {{post.body | safe}}</div> <br> <br>
+
+					<div class="jumbotron">
+					<h4 class='comment'>Comment Section Here!</h4> <br>
+					<div class="fb-comments" data-href="http://127.0.0.1:8000/article/{{post.id}}" data-width="" data-numposts="5"></div>
+					<div class="fb-like" data-href="http://127.0.0.1:8000/article/{{post.id}}" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
+					<div class="fb-share-button" data-href="http://127.0.0.1:8000/article/{{post.id}}" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F127.0.0.1%3A8000%2Farticle%2F10%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+					</div>
+                </div><!--//media-body-->
+				</div>
+            </div><!--//media-->
+        </div><!--//item-->
+ </section>
+</div>
+{% endblock content %}
